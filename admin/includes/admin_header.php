@@ -1,16 +1,15 @@
-<?php include"../includes/db.php" ?>
+<?php include "../includes/db.php" ?>
 <?php session_start(); ?>
-<?php include"functions.php"; ?>
+<?php include "functions.php"; ?>
 <?php ob_start(); ?>
 
 
-<?php 
+<?php
 
 
-if(!isset($_SESSION['user_role'])){
+if (!isset($_SESSION['user_role'])) {
 
-header("Location: ../index.php");
-
+    header("Location: ../index.php");
 }
 
 
@@ -50,11 +49,11 @@ header("Location: ../index.php");
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<!--    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
+    <!--    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
 
-        <link rel="stylesheet" href="css/summernote.css">
+    <link rel="stylesheet" href="css/summernote.css">
 
-        <script src="js/jquery.js"></script>
+    <script src="js/jquery.js"></script>
 
 </head>
 

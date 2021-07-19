@@ -10,5 +10,5 @@ $_SESSION['user_lastname'] = $db_user_lastname;
 $_SESSION['user_role'] = $db_user_role;
 
 header("Location: ../index.php");
-    
+
 ?>

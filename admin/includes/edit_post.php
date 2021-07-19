@@ -126,23 +126,21 @@ if(escape(isset($_POST['update_post']))){
 <label for="user" style="padding: 0px">Users</label>
 <select name="post_user" id="">
 
-<?php echo "<option value='{$post_user}'>{$post_user}</option>"; ?>
-
 <?php
 
-                    $query = "SELECT * FROM users";
-                    $select_users = mysqli_query($connection , $query);  
+$query = "SELECT * FROM users";
+$select_users = mysqli_query($connection , $query);  
 
-                    confirm($select_users);
+confirm($select_users);
 
-                    while($row = mysqli_fetch_assoc($select_users)){
+while($row = mysqli_fetch_assoc($select_users)){
 
-                    $user_id = $row['user_id'];
-                    $username = $row['username'];  
+$user_id = $row['user_id'];
+$username = $row['username'];  
 
+echo "<option value='{$username}'>{$username}</option>";
+}
 
-                    echo "<option value='{$username}'>{$username}</option>";
-                    }
 ?>                    
 </select>
 </div>
