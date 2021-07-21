@@ -27,7 +27,6 @@ function IfItIsMethod($method = null)
 
 function IsLoggedIn()
 {
-
      if (isset($_SESSION['user_role'])) {
 
           return true;
@@ -336,19 +335,17 @@ function login_user($username, $password)
           $db_user_firstname = $row['user_firstname'];
           $db_user_lastname = $row['user_lastname'];
           $db_user_role = $row['user_role'];
-     }
 
+          if (password_verify($password, $db_user_password)) {
 
+               $_SESSION['username'] = $db_username;
+               $_SESSION['user_firstname'] = $db_user_firstname;
+               $_SESSION['user_lastname'] = $db_user_lastname;
+               $_SESSION['user_role'] = $db_user_role;
 
-     if (password_verify($password, $db_user_password)) {
-
-          $_SESSION['username'] = $db_username;
-          $_SESSION['user_firstname'] = $db_user_firstname;
-          $_SESSION['user_lastname'] = $db_user_lastname;
-          $_SESSION['user_role'] = $db_user_role;
-
-          redirect("/cms/admin");
-     } else {
-          return false;
+               redirect("/cms/admin");
+          } else {
+               return false;
+          }
      }
 }

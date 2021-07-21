@@ -1,37 +1,25 @@
 <?php include "includes/db.php"; ?>
 <?php include "includes/header.php"; ?>
-<?php include "admin/functions.php" ?>
 
 <?php
 
-// CheckIfUserIsLoggedInAndRedirect('/CMS/admin');
-// var_dump(IfItIsMethod('post'));
-// var_dump(isset($_POST['username']) && isset($_POST['password']));
-// die;
 if (IfItIsMethod('post')) {
 
     if (isset($_POST['username']) && isset($_POST['password'])) {
 
         login_user($_POST['username'], $_POST['password']);
+    } else {
+
+        redirect('CMS');
     }
-} else {
-
-    // redirect('/CMS/login');
 }
-
-
-
-
-
 
 
 ?>
 
-
 <!-- Navigation -->
 
 <?php include "includes/navigation.php"; ?>
-
 
 <!-- Page Content -->
 <div class="container">
@@ -74,6 +62,12 @@ if (IfItIsMethod('post')) {
 
 
                                 </form>
+
+                                <div class="form-group">
+
+                                    <a href='forgot.php?forgot=<?php echo uniqid(true); ?>'>Forgot Password? </a>
+
+                                </div>
 
                             </div><!-- Body-->
 

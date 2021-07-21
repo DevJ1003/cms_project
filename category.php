@@ -1,11 +1,10 @@
-<?php session_start(); ?>
 <?php include "includes/db.php" ?>
 <?php include "includes/header.php" ?>
 
 
 <!-- Navigation -->
 
-<?php //include "includes/navigation.php" 
+<?php include "includes/navigation.php"
 ?>
 
 <!-- Page Content -->
@@ -42,6 +41,8 @@
 
                     mysqli_stmt_execute($stmt1);
 
+                    mysqli_stmt_store_result($stmt1);
+
                     mysqli_stmt_bind_result($stmt1, $post_id, $post_title, $post_author, $post_date, $post_image, $post_content);
 
                     $stmt = $stmt1;
@@ -71,10 +72,10 @@
             ?>
                     <!-- First Blog Post -->
                     <h2>
-                        <a href="post.php?p_id=<?php echo $post_id ?>"><?php echo $post_title ?></a>
+                        <a href="/CMS/post/<?php echo $post_id ?>"><?php echo $post_title ?></a>
                     </h2>
                     <p class="lead">
-                        by <a href="index.php"><?php echo $post_author ?></a>
+                        by <a href="/CMS/author_posts.php?author=<?php echo $post_author; ?>&p_id=<?php echo $post_id; ?>"><?php echo $post_author; ?></a>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span><?php echo $post_date ?></p>
                     <hr>

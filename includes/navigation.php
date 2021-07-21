@@ -1,6 +1,3 @@
-<?php session_start(); ?>
-
-
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -44,6 +41,8 @@
 
                     $contact = 'contact.php';
 
+                    $login = 'login.php';
+
                     if (isset($_GET['category']) && $_GET['category'] == $cat_id) {
 
                         $category_class = 'active';
@@ -53,7 +52,11 @@
                     } else if ($pageName == $contact) {
 
                         $contact_class = 'active';
+                    } else if ($pageName == $login) {
+
+                        $login_class = 'active';
                     }
+
 
 
                     echo    "<li class='$category_class'>
@@ -64,36 +67,36 @@
                 ?>
 
 
-                <?php if (IsLoggedIn()) : ?>
+                <?php
+
+                if (IsLoggedIn()) :
+                ?>
 
 
                     <li>
                         <a href="/CMS/admin">Admin</a>
                     </li>
 
-                    <li>
-                        <a href="/CMS/includes/logout">Admin</a>
-                    </li>
 
-                <?php else : ?>
+
+                <?php else :
+                ?>
 
                     <li class='<?php echo $login_class; ?>'>
                         <a href="/CMS/login">Login</a>
                     </li>
 
-                <?php endif; ?>
+                    <li class='<?php echo $registration_class; ?>'>
+                        <a href="/CMS/registration">Registration</a>
+                    </li>
 
-                <li class='<?php echo $registration_class; ?>'>
-                    <a href="/CMS/registration">Registration</a>
-                </li>
+
+                <?php endif;
+                ?>
 
                 <li class='<?php echo $contact_class; ?>'>
                     <a href="/CMS/contact">Contact</a>
                 </li>
-
-
-
-
 
 
                 <?php

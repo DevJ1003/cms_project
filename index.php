@@ -52,6 +52,8 @@
                 echo "<h1 class='text-center'>No posts available!</h1>";
             } else {
 
+                echo "<h1 class='page-header text-center'>All Posts</h1>";
+
                 $count = ceil($count / $per_page);
 
 
@@ -69,16 +71,11 @@
                     $post_status = $row['post_status'];
 
 
+
             ?>
 
-                    <h1 class="page-header">
-                        Page Heading
-                        <small>Secondary Text</small>
-                    </h1>
 
                     <!-- First Blog Post -->
-
-                    <h1><?php echo "$count"; ?></h1>
 
                     <h2>
                         <a href="post/<?php echo $post_id ?>"><?php echo $post_title ?></a>
@@ -95,7 +92,7 @@
                     </a>
 
                     <p><?php echo $post_content ?></p>
-                    <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id ?>">Read More<span class="glyphicon glyphicon-chevron-right">
+                    <a class="btn btn-primary" href="/CMS/post/<?php echo $post_id; ?>">Read More<span class="glyphicon glyphicon-chevron-right">
                         </span></a>
 
                     <hr>
