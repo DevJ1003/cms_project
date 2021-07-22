@@ -1,27 +1,24 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Pusher Test</title>
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script>
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('35ca1d8c4aa39ad74506', {
-            cluster: 'ap2'
-        });
-
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
-            alert(JSON.stringify(data));
-        });
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" , user_scalable=no , initial-scale=1.0 , maximum-scale=1>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <h1>Pusher Test</h1>
-    <p>
-        Try publishing an event to channel <code>my-channel</code>
-        with event name <code>my-event</code>.
-    </p>
+
+    <!-- "toastr-files" can be used locally and can be accessed through 'toastr' folder -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        toastr.success('HELLO')
+    </script>
+
 </body>
+
+</html>

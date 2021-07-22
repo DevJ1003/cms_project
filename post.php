@@ -83,6 +83,21 @@
 
                     <hr>
 
+                    <div class="row">
+                        <div class="column">
+                            <p class="text-right"><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
+                                <a href="#"><span class="glyphicon glyphicon-thumbs-down"></span> Unlike</a>
+                            </p>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
                 <?php } ?>
 
 
@@ -213,3 +228,14 @@
 <!-- Footer -->
 
 <?php include "includes/footer.php" ?>
+
+<script>
+    $(document).ready(function() {
+
+        $('.like').click(function() {
+
+            console.log("IT WORKS")
+        });
+
+    });
+</script>
