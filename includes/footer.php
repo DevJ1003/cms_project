@@ -1,8 +1,7 @@
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; CMS By DevJ 2021</p>
-                </div>
-                <!-- /.col-lg-12 -->
+            <div class="col-lg-12">
+                <p class="text-center">Copyright &copy; 2021 CMS Project , DevJ . All Rights Reserved !</p>
+            </div>
+            <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
             </footer>

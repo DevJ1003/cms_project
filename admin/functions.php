@@ -1,6 +1,19 @@
 <?php
 
 
+function imagePlaceholder($image = '')
+{
+
+     if (!$image) {
+          return 'no_image.jpg';
+     } else {
+          return $image;
+     }
+}
+
+
+
+
 function redirect($location)
 {
 
@@ -266,7 +279,6 @@ function username_exists($username)
 
 function email_exists($email)
 {
-
      global $connection;
 
      $query = "SELECT user_email FROM users WHERE user_email = '$email'";

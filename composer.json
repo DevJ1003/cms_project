@@ -1,11 +1,8 @@
 {
-    "name": "dev/cms",
-    "require": {
-        "phpmailer/phpmailer": "^6.5"
-    },
+    "name": "devjoshi1003/devjoshi",
     "autoload": {
         "psr-4": {
-            "Dev\\Cms\\": "src/"
+            "Devjoshi1003\\Devjoshi\\": "src/"
         }
     },
     "authors": [
@@ -13,5 +10,8 @@
             "name": "DevJ1003",
             "email": "devjoshi1384@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "pusher/pusher-php-server": "^7.0"
+    }
 }
