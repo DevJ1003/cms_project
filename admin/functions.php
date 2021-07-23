@@ -1,18 +1,6 @@
 <?php
 
-
-function imagePlaceholder($image = '')
-{
-
-     if (!$image) {
-          return 'no_image.jpg';
-     } else {
-          return $image;
-     }
-}
-
-
-
+/***** DATABASE HELPER FUNCTIONS *****/
 
 function redirect($location)
 {
@@ -22,6 +10,52 @@ function redirect($location)
 }
 
 
+
+
+function query($query)
+{
+
+     global $connection;
+     $result =  mysqli_query($connection, $query);
+     confirm($result);
+     return $result;
+}
+
+
+function fetchRecords($result)
+{
+
+     return mysqli_fetch_array($result);
+}
+
+
+/***** END DATABASE HELPER FUNCTIONS *****/
+
+
+/***** AUTHENTICATION HELPER FUNCTIONS *****/
+
+function is_admin($username)
+{
+
+     global $connection;
+
+     if (IsLoggedIn()) {
+
+          $result = query("SELECT user_role FROM users WHERE user_id = " . $_SESSION['user_id'] . "");
+          $row = fetchRecords($result);
+
+          if ($row['user_role'] == 'Admin') {
+
+               return true;
+          } else {
+
+               return false;
+          }
+     }
+}
+
+
+/***** END AUTHENTICATION HELPER FUNCTIONS *****/
 
 
 function IfItIsMethod($method = null)
@@ -52,6 +86,46 @@ function IsLoggedIn()
 
 
 
+
+function logggedInUserId()
+{
+     if (IsLoggedIn()) {
+
+          $result = query("SELECT * FROM users WHERE username='" . $_SESSION['username'] . "'");
+          confirm($result);
+          $user = mysqli_fetch_array($result);
+          if (mysqli_num_rows($result) >= 1) {
+               return $user['user_id'];
+          }
+     }
+
+     return false;
+}
+
+
+
+
+
+
+
+function userLikedThisPost($post_id = '')
+{
+
+     $result = query("SELECT  * FROM likes WHERE user_id=" . logggedInUserId() . " AND post_id={$post_id}");
+     confirm($result);
+
+     if ($result) {
+
+
+          return mysqli_num_rows($result) >= 1 ? true : false;
+     }
+}
+
+
+
+
+
+
 function CheckIfUserIsLoggedInAndRedirect($redirectLocation = null)
 {
 
@@ -63,12 +137,39 @@ function CheckIfUserIsLoggedInAndRedirect($redirectLocation = null)
 
 
 
+
+function getPostlikes($post_id)
+{
+
+     $result = query("SELECT * FROM likes WHERE post_id=$post_id");
+     confirm($result);
+     echo mysqli_num_rows($result);
+}
+
+
+
+
+
+
 function escape($string)
 {
 
      global $connection;
      return mysqli_real_escape_string($connection, trim($string));
 }
+
+
+
+function imagePlaceholder($image = '')
+{
+
+     if (!$image) {
+          return 'no_image.jpg';
+     } else {
+          return $image;
+     }
+}
+
 
 
 
@@ -234,27 +335,6 @@ function checkUserRole($table, $column, $role)
 
 
 
-function is_admin($username)
-{
-
-     global $connection;
-
-     $query = "SELECT user_role FROM users WHERE username = '$username'";
-     $result = mysqli_query($connection, $query);
-     confirm($result);
-
-     $row = mysqli_fetch_array($result);
-
-     if ($row['user_role'] == 'Admin') {
-
-          return true;
-     } else {
-
-          return false;
-     }
-}
-
-
 
 function username_exists($username)
 {
@@ -350,12 +430,13 @@ function login_user($username, $password)
 
           if (password_verify($password, $db_user_password)) {
 
+               $_SESSION['user_id'] = $db_user_id;
                $_SESSION['username'] = $db_username;
                $_SESSION['user_firstname'] = $db_user_firstname;
                $_SESSION['user_lastname'] = $db_user_lastname;
                $_SESSION['user_role'] = $db_user_role;
 
-               redirect("/cms/admin");
+               redirect("/cms/admin/profile.php");
           } else {
                return false;
           }

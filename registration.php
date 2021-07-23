@@ -66,12 +66,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 
+
 ?>
 
 
 <!-- Navigation -->
 
 <?php include "includes/navigation.php"; ?>
+
 
 
 <!-- Page Content -->

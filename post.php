@@ -6,6 +6,67 @@
 
 <?php include "includes/navigation.php" ?>
 
+<?php
+
+
+if (isset($_POST['liked'])) {
+
+    $post_id = $_POST['post_id'];
+    $user_id = $_POST['user_id'];
+
+
+    // 1 = FETCHING THE RIGHT POST
+
+    $query = "SELECT * FROM posts WHERE post_id = $post_id";
+    $postResult = mysqli_query($connection, $query);
+    $post = mysqli_fetch_array($postResult);
+    $likes = $post['likes'];
+
+    // 2 = UPDATE POST WITH LIKE
+
+    mysqli_query($connection, "UPDATE posts SET likes = $likes + 1 WHERE post_id = $post_id");
+
+    // 3 = CREATE LIKES FOR POSTS
+
+
+    mysqli_query($connection, "INSERT INTO likes(user_id , post_id) VALUES ($user_id , $post_id)");
+    exit();
+}
+
+
+
+
+
+if (isset($_POST['unliked'])) {
+
+
+    echo "unliked";
+
+    $post_id = $_POST['post_id'];
+    $user_id = $_POST['user_id'];
+
+
+    // 1 = FETCHING THE RIGHT POST
+
+    $query = "SELECT * FROM posts WHERE post_id = $post_id";
+    $postResult = mysqli_query($connection, $query);
+    $post = mysqli_fetch_array($postResult);
+    $likes = $post['likes'];
+
+
+    // 2 = DELETE LIKES
+
+    mysqli_query($connection, "DELETE FROM likes WHERE post_id = $post_id AND post_id=$post_id");
+
+    // 3 = UPDATE WITH DECREMENTED LIKES 
+
+
+    mysqli_query($connection, "UPDATE posts SET likes=$likes-1 WHERE post_id=$post_id");
+    exit();
+}
+
+?>
+
 <!-- Page Content -->
 <div class="container">
 
@@ -83,13 +144,38 @@
 
                     <hr>
 
-                    <div class="row">
-                        <div class="column">
-                            <p class="text-right"><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
-                                <a href="#"><span class="glyphicon glyphicon-thumbs-down"></span> Unlike</a>
+
+                    <?php
+
+
+                    if (IsLoggedIn()) { ?>
+
+
+
+                        <div class="row">
+                            <p class="pull-right"><a style="font-size: 22px;" class="<?php echo userLikedThisPost($the_post_id) ? 'unlike' : 'like'; ?>" href=""><span class="glyphicon glyphicon-check" data-toggle="tooltip" data-placement="top" title="<?php echo userLikedThisPost($the_post_id) ? ' You liked the post before !' : ' You want to like the post ?'; ?>"></span><?php echo userLikedThisPost($the_post_id) ? ' Unlike' : ' Like'; ?></a>
                             </p>
                         </div>
+
+
+                    <?php      } else {  ?>
+
+                        <div class="row">
+                            <p style="font-size: 22px;" class="pull-right">You need to <a href="/cms/login">login</a> to like the post !</p>
+                        </div>
+
+                    <?php     }
+
+
+                    ?>
+
+
+                    <div class="row">
+                        <p class="pull-right" style="font-size: 22px;">Like: <?php getPostlikes($the_post_id); ?></p>
                     </div>
+
+
+                    <div class="clearfix"></div>
 
 
 
@@ -232,9 +318,47 @@
 <script>
     $(document).ready(function() {
 
+
+        $("[data-toggle='tooltip']").tooltip();
+
+
+
+        var post_id = <?php echo $the_post_id; ?>;
+        var user_id = <?php echo logggedInUserId(); ?>;
+
+
+        //LIKING FUNCTION
+
         $('.like').click(function() {
 
-            console.log("IT WORKS")
+            $.ajax({
+
+                url: "/cms/post.php?p_id=<?php echo $the_post_id; ?>",
+                type: 'post',
+                data: {
+                    'liked': 1,
+                    'post_id': post_id,
+                    'user_id': user_id,
+                }
+            })
+        });
+
+
+
+        //UNLIKING FUNCTION
+
+        $('.unlike').click(function() {
+
+            $.ajax({
+
+                url: "/cms/post.php?p_id=<?php echo $the_post_id; ?>",
+                type: 'post',
+                data: {
+                    'unliked': 1,
+                    'post_id': post_id,
+                    'user_id': user_id,
+                }
+            })
         });
 
     });
