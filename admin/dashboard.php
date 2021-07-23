@@ -1,10 +1,4 @@
 <?php include "includes/admin_header.php" ?>
-<?php
-
-$post_count = countRecords(get_all_user_posts());
-
-
-?>
 
 <div id="wrapper">
 
@@ -21,8 +15,8 @@ $post_count = countRecords(get_all_user_posts());
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Welcome To Admin
-                        <small><?php echo strtoupper(get_user_name()); ?></small>
+                        Welcome To Admin Dashboard
+                        <small><?php echo $_SESSION['username'] ?></small>
                     </h1>
 
                 </div>

@@ -10,8 +10,6 @@ function redirect($location)
 }
 
 
-
-
 function query($query)
 {
 
@@ -29,12 +27,36 @@ function fetchRecords($result)
 }
 
 
+
+function countRecords($result)
+{
+     return mysqli_num_rows($result);
+}
+
+
 /***** END DATABASE HELPER FUNCTIONS *****/
+
+
+
+
+/***** GENERAL HELPERS *****/
+
+function get_user_name()
+{
+     if (isset($_SESSION['username'])) {
+
+          return $_SESSION['username'];
+     }
+}
+
+/*****  END GENERAL HELPERS *****/
+
+
 
 
 /***** AUTHENTICATION HELPER FUNCTIONS *****/
 
-function is_admin($username)
+function is_admin()
 {
 
      global $connection;
@@ -55,7 +77,23 @@ function is_admin($username)
 }
 
 
+
+
 /***** END AUTHENTICATION HELPER FUNCTIONS *****/
+
+
+
+/***** USER SPECIFIC HELPER FUNCTIONS *****/
+
+
+function get_all_user_posts()
+{
+     $result = query("SELECT * FROM posts WHERE user_id=" . logggedInUserId() . "");
+     return $result;
+}
+
+
+/***** END USER SPECIFIC HELPER FUNCTIONS *****/
 
 
 function IfItIsMethod($method = null)
@@ -236,15 +274,16 @@ function insert_categories()
                echo "This field should not be empty";
           } else {
 
-               $query = "INSERT INTO categories(cat_title) ";
-               $query .= "VALUE('{$cat_title}') ";
+               $stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES(?) ");
+               mysqli_stmt_bind_param($stmt, 's', $cat_title);
+               mysqli_stmt_execute($stmt);
 
-               $create_category_query = mysqli_query($connection, $query);
-
-               if (!$create_category_query) {
+               if (!$stmt) {
                     die('QUERY FAILED' . mysqli_error($connection));
                }
           }
+
+          mysqli_stmt_close($stmt);
      }
 }
 
@@ -436,7 +475,7 @@ function login_user($username, $password)
                $_SESSION['user_lastname'] = $db_user_lastname;
                $_SESSION['user_role'] = $db_user_role;
 
-               redirect("/cms/admin/profile.php");
+               redirect("/cms/admin/index.php");
           } else {
                return false;
           }
