@@ -195,17 +195,20 @@ if (isset($_POST['unliked'])) {
 
                 if (isset($_POST['create_comment'])) {
 
+                    $_SESSION['user_id'];
+
                     $the_post_id = $_GET['p_id'];
+                    $user_id = $_POST['post_user'];
                     $comment_author = $_POST['comment_author'];
                     $comment_email = $_POST['comment_email'];
                     $comment_content = $_POST['comment_content'];
 
                     if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
 
-                        $query = "INSERT INTO comments (comment_post_id , comment_author , comment_email ,
+                        $query = "INSERT INTO comments (comment_post_id , user_id , comment_author , comment_email ,
     comment_content , comment_status , comment_date)";
 
-                        $query .= "VALUES ($the_post_id , '{$comment_author}' , '{$comment_email}' , '{$comment_content}' ,
+                        $query .= "VALUES ($the_post_id , '{$_SESSION['user_id']}' , '{$comment_author}' , '{$comment_email}' , '{$comment_content}' ,
     'unapproved' , now() )";
 
                         $create_comment_query = mysqli_query($connection, $query);
@@ -254,7 +257,7 @@ if (isset($_POST['unliked'])) {
                 <?php
 
                 $query = "SELECT * FROM comments WHERE comment_post_id = {$the_post_id} ";
-                $query .= "AND comment_status = 'approved' ";
+                $query .= "AND comment_status = 'Approved' ";
                 $query .= "ORDER BY comment_id DESC ";
                 $select_comment_query = mysqli_query($connection, $query);
                 if (!$select_comment_query) {

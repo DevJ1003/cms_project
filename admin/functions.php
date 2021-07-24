@@ -93,7 +93,72 @@ function get_all_user_posts()
 }
 
 
+
+function get_all_user_category()
+{
+
+     $result = query("SELECT * FROM categories WHERE user_id=" . logggedInUserId() . "");
+     return $result;
+}
+
+
+
+function get_all_user_published_posts()
+{
+
+     $result = query("SELECT * FROM posts WHERE user_id=" . logggedInUserId() . " AND post_status='Published'");
+     return $result;
+}
+
+
+
+function get_all_user_draft_posts()
+{
+
+     $result = query("SELECT * FROM posts WHERE user_id=" . logggedInUserId() . " AND post_status='Draft'");
+     return $result;
+}
+
+
 /***** END USER SPECIFIC HELPER FUNCTIONS *****/
+
+
+
+
+/***** ADMIN WELCOME LINE *****/
+
+
+function welcomeLineIndex()
+{
+
+     if ($_SESSION['user_role'] == "Admin") {
+
+          echo " Welcome To My Data";
+     } else {
+
+          echo " Welcome To My Data";
+     }
+}
+
+
+
+
+function welcomeLineDashboard()
+{
+
+     if ($_SESSION['user_role'] == "Admin") {
+
+          echo " Welcome To Dashboard";
+     }
+}
+
+
+
+
+/***** END ADMIN WELCOME LINE *****/
+
+
+
 
 
 function IfItIsMethod($method = null)
@@ -266,6 +331,7 @@ function insert_categories()
 
      if (isset($_POST['submit'])) {
 
+          $_SESSION['user_id'];
           $cat_title = $_POST['cat_title'];
 
 
@@ -275,7 +341,7 @@ function insert_categories()
           } else {
 
                $stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES(?) ");
-               mysqli_stmt_bind_param($stmt, 's', $cat_title);
+               mysqli_stmt_bind_param($stmt, 's', $cat_title, $user_id);
                mysqli_stmt_execute($stmt);
 
                if (!$stmt) {
