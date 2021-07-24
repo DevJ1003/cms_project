@@ -1,8 +1,8 @@
 <?php
 
-
 if (escape(isset($_POST['create_post']))) {
 
+    $_SESSION['user_id'];
 
     $post_title = $_POST['title'];
     $post_user = $_POST['post_user'];
@@ -26,7 +26,7 @@ if (escape(isset($_POST['create_post']))) {
     $query = "INSERT INTO posts( post_category_id , user_id , post_title , post_user , post_date , post_image , post_content , post_tags 
                             , post_status ) ";
 
-    $query .= "VALUES( '{$post_category_id}' , '{post_user}' , '{$post_title}' , '{$post_user}' , '{$post_date}' , '{$post_image}' , '{$post_content}' ,
+    $query .= "VALUES( '{$post_category_id}' , '{$_SESSION['user_id']}' , '{$post_title}' , '{$post_user}' , '{$post_date}' , '{$post_image}' , '{$post_content}' ,
                   '{$post_tags}' , '{$post_status}' )";
 
     $create_post_query = mysqli_query($connection, $query);

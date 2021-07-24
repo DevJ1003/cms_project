@@ -330,30 +330,41 @@ function deleteCategories()
 
 
 
-function recordCount($table)
+function recordCount($table, $user_id = 0)
 {
 
      global $connection;
 
      $query = "SELECT * FROM " . $table;
+     if ($user_id > 0) {
+          $query .= " WHERE user_id='$user_id'";
+     }
+
      $select_all_post = mysqli_query($connection, $query);
 
+     $result = 0;
+     if (is_object($select_all_post) && $select_all_post->num_rows > 0) {
+          $result = mysqli_num_rows($select_all_post);
+          confirm($result);
+     }
 
-
-     $result = mysqli_num_rows($select_all_post);
-     confirm($result);
      return $result;
 }
 
 
 
 
-function checkStatus($table, $column, $status)
+function checkStatus($table, $column, $status, $user_id)
 {
 
      global $connection;
 
-     $query = "SELECT * FROM $table WHERE $column = '$status' ";
+     $query = "SELECT * FROM $table WHERE $column = '$status'";
+
+     if ($user_id > 0) {
+          $query .= "AND user_id='$user_id'";
+     }
+
      $result = mysqli_query($connection, $query);
 
      confirm($result);

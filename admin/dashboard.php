@@ -127,13 +127,13 @@
             <!-- /.row -->
 
             <?php
-            $post_published_count = checkStatus('posts', 'post_status', 'published');
+            $post_published_count = checkStatus('posts', 'post_status', 'published', 0);
 
-            $draft_post_count = checkStatus('posts', 'post_status', 'draft');
+            $draft_post_count = checkStatus('posts', 'post_status', 'draft', 0);
 
-            $unnaproved_comment_count = checkStatus('comments', 'comment_status', 'unapproved');
+            $unnaproved_comment_count = checkStatus('comments', 'comment_status', 'unapproved', 0);
 
-            $subscriber_count = checkStatus('users', 'user_role', 'subscriber');
+            $subscriber_count = checkStatus('users', 'user_role', 'subscriber', 0);
 
 
             ?>

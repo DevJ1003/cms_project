@@ -1,8 +1,10 @@
-<?php include "includes/admin_header.php" ?>
 <?php
 
-$post_count = countRecords(get_all_user_posts());
+include "includes/admin_header.php";
 
+$post_count = countRecords(get_all_user_posts());
+$category_count = recordCount('categories', $_SESSION['user_id']);
+$user_count = recordCount('users', $_SESSION['user_id'])
 
 ?>
 
@@ -42,7 +44,7 @@ $post_count = countRecords(get_all_user_posts());
                                 </div>
                                 <div class="col-xs-9 text-right">
 
-                                    <div class='huge'><?php echo $post_count = recordCount('posts'); ?></div>
+                                    <div class='huge'><?php echo $post_count = recordCount('posts', $_SESSION['user_id']); ?></div>
 
                                     <div>Posts</div>
                                 </div>
@@ -66,7 +68,7 @@ $post_count = countRecords(get_all_user_posts());
                                 </div>
                                 <div class="col-xs-9 text-right">
 
-                                    <div class='huge'><?php echo $comment_count = recordCount('comments'); ?></div>
+                                    <div class='huge'><?php echo $comment_count = recordCount('comments', $_SESSION['user_id']); ?></div>
 
                                     <div>Comments</div>
                                 </div>
@@ -81,65 +83,71 @@ $post_count = countRecords(get_all_user_posts());
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-user fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
+                <?php
+                if ($_SESSION['user_role'] == "Admin") {
+                ?>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-user fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
 
-                                    <div class='huge'><?php echo $user_count = recordCount('users'); ?></div>
+                                        <div class='huge'><?php echo $user_count; ?></div>
 
-                                    <div> Users</div>
+                                        <div> Users</div>
+                                    </div>
                                 </div>
                             </div>
+                            <a href="users.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
                         </div>
-                        <a href="users.php">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-list fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-list fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
 
-                                    <div class='huge'><?php echo $category_count = recordCount('categories'); ?></div>
+                                        <div class='huge'><?php echo $category_count; ?></div>
 
-                                    <div>Categories</div>
+                                        <div>Categories</div>
+                                    </div>
                                 </div>
                             </div>
+                            <a href="categories.php">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
                         </div>
-                        <a href="categories.php">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
                     </div>
-                </div>
+                <?php
+                }
+                ?>
             </div>
             <!-- /.row -->
 
             <?php
-            $post_published_count = checkStatus('posts', 'post_status', 'published');
+            $post_published_count = checkStatus('posts', 'post_status', 'published', $_SESSION['user_id']);
 
-            $draft_post_count = checkStatus('posts', 'post_status', 'draft');
+            $draft_post_count = checkStatus('posts', 'post_status', 'draft', $_SESSION['user_id']);
 
-            $unnaproved_comment_count = checkStatus('comments', 'comment_status', 'unapproved');
+            $unnaproved_comment_count = checkStatus('comments', 'comment_status', 'unapproved', $_SESSION['user_id']);
 
-            $subscriber_count = checkStatus('users', 'user_role', 'subscriber');
+            $subscriber_count = checkStatus('users', 'user_role', 'subscriber', $_SESSION['user_id']);
 
 
             ?>
@@ -162,16 +170,28 @@ $post_count = countRecords(get_all_user_posts());
 
                             <?php
 
-                            $element_text = [
-                                'All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Unnaproved Comments', 'Users', 'Subscribers',
-                                'Categories'
-                            ];
+                            if ($_SESSION["user_role"] == "Admin") {
+                                $element_text = [
+                                    'All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Unnaproved Comments', 'Users', 'Subscribers',
+                                    'Categories'
+                                ];
 
 
-                            $element_count = [
-                                $post_count, $post_published_count, $draft_post_count,  $comment_count, $unnaproved_comment_count, $user_count,
-                                $subscriber_count, $category_count
-                            ];
+                                $element_count = [
+                                    $post_count, $post_published_count, $draft_post_count,  $comment_count, $unnaproved_comment_count, $user_count,
+                                    $subscriber_count, $category_count
+                                ];
+                            } else {
+                                $element_text = [
+                                    'All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Unnaproved Comments'
+                                ];
+
+
+                                $element_count = [
+                                    $post_count, $post_published_count, $draft_post_count,  $comment_count, $unnaproved_comment_count
+                                ];
+                            }
+
 
 
                             for ($i = 0; $i < count($element_count); $i++) {
