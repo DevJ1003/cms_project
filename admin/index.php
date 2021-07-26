@@ -1,5 +1,12 @@
 <?php include "includes/admin_header.php";
 
+
+?>
+
+
+<?php
+
+
 $post_count = countRecords(get_all_user_posts());
 $category_count = recordCount('categories', $_SESSION['user_id']);
 $category_count = countRecords(get_all_user_category());

@@ -28,6 +28,8 @@
 
     <link href="/CMS/css/styles.css" rel="stylesheet">
     <?php include "admin/functions.php" ?>
+    <?php include "./pusher_index.php" ?>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 </head>
 
 <body>
