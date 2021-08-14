@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>Blog Home - ACMSProject</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/CMS/css/bootstrap.min.css" rel="stylesheet">

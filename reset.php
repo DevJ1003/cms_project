@@ -1,17 +1,10 @@
-<?php include "includes/db.php"; ?>
-<?php include "includes/header.php"; ?>
-
-
 <?php
 
+include "includes/db.php";
+include "includes/header.php";
+
+
 $verified = false;
-
-
-// if (!isset($_GET['email']) && !isset($_GET['token'])) {
-
-//     redirect('index');
-// }
-
 
 $email = 'dev@gmail.com';
 
@@ -29,14 +22,6 @@ if ($stmt = mysqli_prepare($connection, 'SELECT username , user_email , token FR
     mysqli_stmt_fetch($stmt);
 
     mysqli_stmt_close($stmt);
-
-
-
-
-    // if ($_GET['token'] !== $token || $_GET['email'] !== $email) {
-
-    //     redirect('index');
-    // }
 
 
 
@@ -70,13 +55,12 @@ if ($stmt = mysqli_prepare($connection, 'SELECT username , user_email , token FR
 }
 
 
+
+/* Navigation */
+
+include "includes/navigation.php";
+
 ?>
-
-
-
-<!-- Navigation -->
-
-<?php include "includes/navigation.php"; ?>
 
 
 <!-- Page Content -->
@@ -118,7 +102,8 @@ if ($stmt = mysqli_prepare($connection, 'SELECT username , user_email , token FR
                                         <input type="hidden" class="hide" name="token" id="token" value="">
                                     </form>
 
-                                </div><!-- Body-->
+                                </div>
+                                <!-- Body-->
 
                             </div>
                         </div>
@@ -131,11 +116,9 @@ if ($stmt = mysqli_prepare($connection, 'SELECT username , user_email , token FR
 
         <?php redirect('/CMS/login'); ?>
 
-
     <?php endif; ?>
 
     <hr>
-
     <?php include "includes/footer.php"; ?>
 
 </div> <!-- /.container -->

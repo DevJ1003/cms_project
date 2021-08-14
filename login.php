@@ -1,7 +1,8 @@
-<?php include "includes/db.php"; ?>
-<?php include "includes/header.php"; ?>
-
 <?php
+
+include "includes/db.php";
+include "includes/header.php";
+
 
 if (IfItIsMethod('post')) {
 
@@ -15,11 +16,12 @@ if (IfItIsMethod('post')) {
 }
 
 
+/* Navigation */
+
+include "includes/navigation.php";
+
 ?>
 
-<!-- Navigation -->
-
-<?php include "includes/navigation.php"; ?>
 
 <!-- Page Content -->
 <div class="container">
@@ -69,7 +71,9 @@ if (IfItIsMethod('post')) {
 
                                 </div>
 
-                            </div><!-- Body-->
+                            </div>
+
+                            <!-- Body-->
 
                         </div>
                     </div>

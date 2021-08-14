@@ -1,10 +1,13 @@
-<?php include "includes/db.php" ?>
-<?php include "includes/header.php" ?>
+<?php
+
+include "includes/db.php";
+include "includes/header.php";
 
 
-<!-- Navigation -->
+/* Navigation */
+include "includes/navigation.php";
 
-<?php include "includes/navigation.php" ?>
+?>
 
 <!-- Page Content -->
 <div class="container">
@@ -35,9 +38,7 @@
                 $page_1 = ($page * $per_page) - $per_page;
             }
 
-
-
-            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'Admin') {
+            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'Admin') {
 
                 $post_query_count = "SELECT * FROM posts ";
             } else {
@@ -46,10 +47,12 @@
             }
 
 
-
-
             $find_count = mysqli_query($connection, $post_query_count);
-            $count = mysqli_num_rows($find_count);
+
+            if ($find_count) {
+
+                $count = mysqli_num_rows($find_count);
+            }
 
             if ($count < 1) {
 
@@ -91,7 +94,7 @@
                     <hr>
 
                     <a href="post.php?p_id=<?php echo $post_id ?>">
-                        <img class="img-responsive" src="images/<?php echo $post_image ?>" alt="">
+                        <img class="img-responsive" src="images/<?php echo imagePlaceholder($post_image); ?>" alt="">
                         <hr>
                     </a>
 
@@ -120,7 +123,7 @@
 </div>
 <!-- /.row -->
 
-<hr>
+
 
 <ul class="pager">
 
@@ -128,11 +131,8 @@
 
     for ($i = 1; $i <= $count; $i++) {
 
-        if ($i == $page) {
-            echo "<li><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
-        } else {
-            echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
-        }
+        $pgCount = $i == $page ? "<li><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>" : "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+        echo $pgCount;
     }
 
     ?>
@@ -140,5 +140,7 @@
 </ul>
 
 <!-- Footer -->
+
+<hr>
 
 <?php include "includes/footer.php" ?>

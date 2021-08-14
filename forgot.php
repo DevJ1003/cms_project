@@ -7,25 +7,15 @@ use PHPMailer\PHPMailer\Exception;
 include "includes/db.php";
 include "includes/header.php";
 include "Classes/Config.php";
-
 require './vendor/autoload.php';
 
-
-// if (!IfItIsMethod('get') && !isset($_GET['forgot'])) {    ************original
-
-//     redirect('forgot');
-// }
-
-
-if (!isset($_GET['forgot'])) {        //for forgot mailing
+/* FORGOT MAILING */
+if (!isset($_GET['forgot'])) {
 
     redirect('forgot');
 }
 
-// var_dump(IfItIsMethod('post'));
-// var_dump(isset($_POST['email']));
-// var_dump(email_exists($_POST['email']));
-// die;
+
 if (IfItIsMethod('post')) {
 
     if (isset($_POST['email'])) {
@@ -39,41 +29,8 @@ if (IfItIsMethod('post')) {
         if (email_exists($email)) {
 
 
-            // $stmt = $mysqli->prepare("UPDATE users SET token =? WHERE user_email= ?");
-            // $stmt->bind_param("si", $token, $email);
-            // $stmt->execute();
-            // $stmt->close();
-
             $query = "UPDATE users SET token={$token} WHERE user_email= $email";
             mysqli_query($connection, $query);
-
-
-            /**
-             * 
-             * 
-             * configure PHPMailer
-             * 
-             * 
-             * 
-             * 
-             */
-
-            // $mail = new PHPMailer();
-
-            // $mail->isSMTP();
-            // $mail->Host       = Config::SMTP_HOST;
-            // $mail->Username   = Config::SMTP_USER;
-            // $mail->Password   = Config::SMTP_PASSWORD;
-            // $mail->Port       = Config::SMTP_PORT;
-            // $mail->SMTPSecure = 'tls';
-            // $mail->SMTPAuth   = true;
-            // $mail->isHTML(true);
-            // $mail->CharSet = 'UTF-8';
-
-            // $mail->setFrom('devjoshi1384@gmail.com', 'Dev Joshi');
-            // $mail->addAddress($email);
-
-            // $mail->Subject = 'This is test email';
 
             $mail = new PHPMailer(true);
 
@@ -84,34 +41,25 @@ if (IfItIsMethod('post')) {
             //Set PHPMailer to use SMTP.
             $mail->isSMTP();
             //Set SMTP host name                          
-            $mail->Host = $config->SMTP_HOST; //"smtp.gmail.com";
+            $mail->Host = $config->SMTP_HOST;
             //Set this to true if SMTP host requires authentication to send email
             $mail->SMTPAuth = true;
             //Provide username and password     
-            $mail->Username = $config->SMTP_USER; //"acmsexample7@gmail.com";
-            $mail->Password = $config->SMTP_PASSWORD; //"ACMSexample7";
+            $mail->Username = $config->SMTP_USER;
+            $mail->Password = $config->SMTP_PASSWORD;
             //If SMTP requires TLS encryption then set it
             $mail->SMTPSecure = 'tls';
             //Set TCP port to connect to
-            $mail->Port = $config->SMTP_PORT; //587;
-
+            $mail->Port = $config->SMTP_PORT;
             $mail->setFrom('devjoshi1384@gmail.com', 'Dev Joshi');
             $mail->addAddress($email);
             $mail->CharSet = 'UTF-8';
 
-            // $mail->From = "acmsexample7@gmail.com";
-            // $mail->FromName = "Dev Joshi";
-            // $mail->addAddress("acmsexample7@gmail.com", "Dev Joshi Receiver");
 
             $mail->isHTML(true);
-
-
             $mail->Body = '<p>Please click to reset your password
 
-
-                <a href="https://localhost/CMS/reset.php?email=' . $email . '&token=' . $token . ' ">http://localhost/CMS/reset.php?email=' . $email . '&token=' . $token . '</a>
-                
-            </p>';
+            <a href="https://localhost/CMS/reset.php?email=' . $email . '&token=' . $token . ' ">http://localhost/CMS/reset.php?email=' . $email . '&token=' . $token . '</a></p>';
 
             if ($mail->send()) {
 
@@ -142,14 +90,10 @@ if (IfItIsMethod('post')) {
 
                             <?php if (!isset($emailSent)) : ?>
 
-
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
                                 <h2 class="text-center">Forgot Password?</h2>
                                 <p>You can reset your password here.</p>
                                 <div class="panel-body">
-
-
-
 
                                     <form id="register-form" role="form" autocomplete="off" class="form" method="post">
 

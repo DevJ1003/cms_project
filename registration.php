@@ -1,9 +1,7 @@
-<?php include "includes/db.php"; ?>
-<?php include "includes/header.php"; ?>
-
-
-
 <?php
+
+include "includes/db.php";
+include "includes/header.php";
 
 
 if (isset($_GET['lang']) && !empty($_GET['lang'])) {
@@ -26,13 +24,7 @@ if (isset($_SESSION['lang'])) {
 
 
 
-
-
-
-
-
-
-// AUTHENTICATION
+/* AUTHENTICATION */
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -80,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
 
-
     foreach ($error as $key => $value) {
 
         if (empty($value)) {
@@ -97,13 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 
+/* Navigation */
+
+include "includes/navigation.php";
+
 ?>
-
-
-<!-- Navigation -->
-
-<?php include "includes/navigation.php"; ?>
-
 
 
 <!-- Page Content -->
@@ -133,8 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <div class="form-wrap">
                         <h1><?php echo _REGISTER; ?></h1>
                         <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
-                            <!-- <h6><?php //echo $message; 
-                                        ?></h6> -->
+
                             <div class="form-group">
                                 <label for="username" class="sr-only">username</label>
                                 <input type="text" name="username" id="username" class="form-control" placeholder="<?php echo _USERNAME; ?>" autocomplete="on" value="<?php echo isset($username) ? $username : '' ?>">

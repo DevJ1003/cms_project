@@ -1,10 +1,14 @@
-<?php include "includes/db.php" ?>
-<?php include "includes/header.php" ?>
+<?php
 
+include "includes/db.php";
+include "includes/header.php";
 
-<!-- Navigation -->
+/* Navigation */
 
-<?php include "includes/navigation.php" ?>
+include "includes/navigation.php";
+
+?>
+
 
 <!-- Page Content -->
 <div class="container">
@@ -61,8 +65,6 @@
                         <hr>
                         <p><?php echo $post_content ?></p>
                         <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-                        <hr>
 
             <?php }
                 }

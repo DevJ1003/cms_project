@@ -1,10 +1,21 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/db.php" ?>
+<?php
+
+include "includes/header.php";
+include "includes/db.php";
 
 
-<!-- Navigation -->
+if (isset($_GET['p_id'])) {
 
-<?php include "includes/navigation.php" ?>
+    $the_post_id = $_GET['p_id'];
+    $the_post_author = $_GET['author'];
+}
+
+
+
+/* Navigation */
+include "includes/navigation.php";
+
+?>
 
 <!-- Page Content -->
 <div class="container">
@@ -16,19 +27,6 @@
 
 
 
-
-
-
-            <?php
-
-            if (isset($_GET['p_id'])) {
-
-                $the_post_id = $_GET['p_id'];
-                $the_post_author = $_GET['author'];
-            }
-
-            ?>
-
             <h1 class="page-header text-center">
                 All posts by
                 <?php echo $the_post_author; ?>
@@ -36,7 +34,6 @@
 
 
             <?php
-
 
             $query = "SELECT * FROM posts WHERE post_user = '{$the_post_author}' ";
             $select_all_posts = mysqli_query($connection, $query);
@@ -51,7 +48,6 @@
                 $post_content = $row['post_content'];
 
             ?>
-
 
 
                 <!-- First Blog Post -->
@@ -69,10 +65,6 @@
 
 
             <?php } ?>
-
-
-
-
 
 
             <!-- Blog Comments -->
