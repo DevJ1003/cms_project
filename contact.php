@@ -6,8 +6,8 @@ include "includes/header.php";
 
 if (isset($_POST['submit'])) {
 
-    $to         = "acmsexample7@gmail.com";
-    $from       = $_POST['submit'];
+    $to         = $_POST['submit'];
+    $from       = "acmsexample7@gmail.com";
     $subject    = wordwrap($_POST['subject'], 70);
     $body       = $_POST['body'];
     $header     = "From: " . $_POST['email'];
