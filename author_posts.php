@@ -82,7 +82,7 @@ include "includes/navigation.php";
 
                 if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
 
-                    $query = "INSERT INTO comments (comment_post_id , comment_author , comment_email ,
+                    $query = " (comment_post_id , comment_author , comment_email ,
     comment_content , comment_status , comment_date)";
 
                     $query .= "VALUES ($the_post_id , '{$comment_author}' , '{$comment_email}' , '{$comment_content}' ,
