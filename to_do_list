@@ -1,0 +1,43 @@
+ADMIN ERRORS ==================================================================
+
+
+post ------ table view
+
+add_post ----- page layout
+
+edit_post ------- page layout
+
+category -------- error
+
+comments ------- table view
+
+update_user --------- redirect problem
+
+add_user -------- empty fields entered
+
+my_data -- index.php ------ page layout
+
+my_data -- index.php -------- links for personal my_data
+
+dashboard.php ------------- links for all data
+
+header -- link icons to be added
+
+
+
+HOMEPAGE ERRORS ====================================================================
+
+
+posts ------ post_author not displayed
+
+posts ----- comment section
+
+post --------- post_likes function
+
+to make ---- likes table in database
+
+header -- link icons to be added
+
+auhtor_post -- page layout
+
+all over layout of the site to be viewed

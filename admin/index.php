@@ -7,13 +7,65 @@
 <?php
 
 
-$post_count = countRecords(get_all_user_posts());
-$category_count = recordCount('categories', $_SESSION['user_id']);
-$category_count = countRecords(get_all_user_category());
-$post_published_count = countRecords((get_all_user_published_posts()));
-$draft_post_count = countRecords(get_all_user_draft_posts());
-$unapproved_comment_count = checkStatus('comments', 'comment_status', 'unapproved', $_SESSION['user_id']);
-$approved_comment_count = checkStatus('comments', 'comment_status', 'approved', $_SESSION['user_id']);
+// $post_count = countRecords(get_all_user_posts());
+// $category_count = recordCount('categories', $_SESSION['user_id']);
+// $category_count = countRecords(get_all_user_category());
+// $post_published_count = countRecords((get_all_user_published_posts()));
+// $draft_post_count = countRecords(get_all_user_draft_posts());
+// $unapproved_comment_count = checkStatus('comments', 'comment_status', 'unapproved', $_SESSION['user_id']);
+// $approved_comment_count = checkStatus('comments', 'comment_status', 'approved', $_SESSION['user_id']);
+
+function count_comments_user()
+{
+
+
+    if (IsLoggedIn()) {
+
+        $username = $_SESSION['username'];
+
+
+        $query = query("SELECT comment_id FROM comments WHERE comment_author = '{$username}' ");
+        confirm($query);
+
+        $comments_count = mysqli_num_rows($query);
+
+        echo $comments_count;
+    }
+}
+
+
+
+
+
+
+function count_posts_user()
+{
+
+
+    if (IsLoggedIn()) {
+
+        $username = $_SESSION['username'];
+
+
+        $query = query("SELECT post_id FROM posts WHERE post_author = '{$username}' ");
+        confirm($query);
+
+        $posts_count = mysqli_num_rows($query);
+
+        echo $posts_count;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 ?>
 
@@ -51,7 +103,7 @@ $approved_comment_count = checkStatus('comments', 'comment_status', 'approved', 
 
 
             <div class="row">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
@@ -60,11 +112,7 @@ $approved_comment_count = checkStatus('comments', 'comment_status', 'approved', 
                                 </div>
                                 <div class="col-xs-9 text-right">
 
-                                    <!-- <div class='huge'><?php //echo $post_count = recordCount('posts', $_SESSION['user_id']); 
-                                                            ?></div> -->
-
-
-                                    <?php echo "<div class='huge'>" . $post_count . "</div>" ?>
+                                    <div class='huge'><?php count_posts_user(); ?></div>
                                     <div>Posts</div>
                                 </div>
                             </div>
@@ -78,7 +126,7 @@ $approved_comment_count = checkStatus('comments', 'comment_status', 'approved', 
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             <div class="row">
@@ -87,7 +135,7 @@ $approved_comment_count = checkStatus('comments', 'comment_status', 'approved', 
                                 </div>
                                 <div class="col-xs-9 text-right">
 
-                                    <div class='huge'><?php echo $comment_count = recordCount('comments', $_SESSION['user_id']); ?></div>
+                                    <div class='huge'><?php count_comments_user(); ?></div>
 
                                     <div>Comments</div>
                                 </div>
@@ -104,7 +152,7 @@ $approved_comment_count = checkStatus('comments', 'comment_status', 'approved', 
                 </div>
 
 
-                <div class="col-lg-4 col-md-6">
+                <!-- <div class="col-lg-4 col-md-6">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
@@ -113,7 +161,8 @@ $approved_comment_count = checkStatus('comments', 'comment_status', 'approved', 
                                 </div>
                                 <div class="col-xs-9 text-right">
 
-                                    <?php echo "<div class='huge'>" . $category_count . "</div>" ?>
+                                    <?php //echo "<div class='huge'>" . $category_count . "</div>" 
+                                    ?>
 
                                     <div>Categories</div>
                                 </div>
@@ -127,7 +176,7 @@ $approved_comment_count = checkStatus('comments', 'comment_status', 'approved', 
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> -->
 
             </div>
             <!-- /.row -->

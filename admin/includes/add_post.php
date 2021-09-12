@@ -3,11 +3,12 @@
 if (escape(isset($_POST['create_post']))) {
 
     $_SESSION['user_id'];
+    $_SESSION['username'];
 
     $post_title = $_POST['title'];
-    $post_user = $_POST['post_user'];
+    $post_user = $_SESSION['username'];
     $post_category_id = $_POST['post_category'];
-    $user_id = $_POST['post_user'];
+    $user_id = $_SESSION['user_id'];
     $post_status = $_POST['post_status'];
 
 
@@ -23,7 +24,7 @@ if (escape(isset($_POST['create_post']))) {
 
 
 
-    $query = "INSERT INTO posts( post_category_id , user_id , post_title , post_user , post_date , post_image , post_content , post_tags 
+    $query = "INSERT INTO posts( post_category_id , post_user , post_title , post_date , post_image , post_content , post_tags 
                             , post_status ) ";
 
     $query .= "VALUES( '{$post_category_id}' , '{$_SESSION['user_id']}' , '{$post_title}' , '{$post_user}' , '{$post_date}' , '{$post_image}' , '{$post_content}' ,
@@ -72,28 +73,7 @@ if (escape(isset($_POST['create_post']))) {
     </select>
     </div>
 
-
-    <label for="user" style="padding: 15px">User</label>
-    <select name="post_user" id="">
-        <?php
-
-        $query = "SELECT * FROM users";
-        $select_users = mysqli_query($connection, $query);
-
-        confirm($select_users);
-
-        while ($row = mysqli_fetch_assoc($select_users)) {
-
-            $user_id = $row['user_id'];
-            $username = $row['username'];
-
-
-            echo "<option value='{$username}'>{$username}</option>";
-        }
-        ?>
-    </select>
     </div>
-
     <div class="from-group">
         <select name="post status" id="">
             <option value="Draft">Post Status</option>
