@@ -36,7 +36,7 @@ include "includes/navigation.php";
 
 
                             <h3><i class="fa fa-user fa-4x"></i></h3>
-                            <h2 class="text-center">Login</h2>
+                            <h2 class="text-center"><span class="glyphicon glyphicon-log-in"></span> Login</h2>
                             <div class="panel-body">
 
 

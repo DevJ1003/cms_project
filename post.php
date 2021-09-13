@@ -61,7 +61,7 @@ if (isset($_GET['p_id'])) {
 
 
         // 2 = DELETE LIKES
-        mysqli_query($connection, "DELETE FROM likes WHERE post_id = $post_id AND post_id=$post_id");
+        mysqli_query($connection, "DELETE FROM likes WHERE post_id = $post_id AND user_id = $user_id");
 
         // 3 = UPDATE WITH DECREMENTED LIKES 
         mysqli_query($connection, "UPDATE posts SET likes=$likes-1 WHERE post_id=$post_id");
@@ -74,8 +74,6 @@ if (isset($_GET['p_id'])) {
 
     if (isset($_POST['create_comment'])) {
 
-        $_SESSION['user_id'];
-
         $the_post_id = $_GET['p_id'];
         $comment_author = $_POST['comment_author'];
         $comment_email = $_POST['comment_email'];
@@ -83,11 +81,11 @@ if (isset($_GET['p_id'])) {
 
         if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
 
-            $query = " (comment_post_id , user_id , comment_author , comment_email ,
-comment_content , comment_status , comment_date)";
+            $query = "INSERT INTO comments(comment_post_id , comment_author , comment_email ,
+comment_content , comment_status , comment_date) ";
 
-            $query .= "VALUES ($the_post_id , '{$_SESSION['user_id']}' , '{$comment_author}' , '{$comment_email}' , '{$comment_content}' ,
-'unapproved' , now() )";
+            $query .= "VALUES ($the_post_id  , '{$comment_author}' , '{$comment_email}' , '{$comment_content}' ,
+'Unapproved' , now() )";
 
             $create_comment_query = mysqli_query($connection, $query);
 
@@ -135,7 +133,7 @@ comment_content , comment_status , comment_date)";
 
                         $post_id = $row['post_id'];
                         $post_title = $row['post_title'];
-                        $post_author = $row['post_user'];
+                        $post_author = $row['post_author'];
                         $post_date = $row['post_date'];
                         $post_image = $row['post_image'];
                         $post_content = $row['post_content'];
@@ -144,8 +142,8 @@ comment_content , comment_status , comment_date)";
 
                 ?>
 
-                    <h1 class="page-header . text-center">
-                        Post
+                    <h1 class="page-header . text-center"><span class='glyphicon glyphicon-th-large'></span>
+                        Post...!!
                     </h1>
 
                     <!-- First Blog Post -->
@@ -183,7 +181,8 @@ comment_content , comment_status , comment_date)";
 
 
                     <div class="row">
-                        <p class="pull-right" style="font-size: 22px;">Like: <?php getPostlikes($the_post_id); ?></p>
+                        <p class="pull-right" style="font-size: 22px;">Like: <?php getPostlikes($the_post_id);
+                                                                                ?></p>
                     </div>
 
                     <div class="clearfix"></div>
@@ -215,8 +214,12 @@ comment_content , comment_status , comment_date)";
 
 
                 <!-- Posted Comments -->
+                <h2>Posted Comments :</h2>
+                <hr>
 
                 <?php
+
+
 
                 $query = "SELECT * FROM comments WHERE comment_post_id = {$the_post_id} ";
                 $query .= "AND comment_status = 'Approved' ";
@@ -234,8 +237,7 @@ comment_content , comment_status , comment_date)";
                 ?>
 
 
-                    <h2>Posted Comments :</h2>
-                    <hr>
+
 
                     <!-- Comment -->
                     <div class="media">

@@ -1,43 +1,45 @@
 ADMIN ERRORS ==================================================================
 
 
-post ------ table view
+post ------ table view ======yes
 
-add_post ----- page layout
+add_post ----- page layout ==============yes
 
-edit_post ------- page layout
+edit_post ------- page layout ============yes
 
-category -------- error
+auhtor_post -------- error ============yes
 
-comments ------- table view
+category -------- error =========yes
 
-update_user --------- redirect problem
+comments ------- table view ======yes
 
-add_user -------- empty fields entered
+update_user --------- redirect problem ==========yes
 
-my_data -- index.php ------ page layout
+add_user -------- empty fields entered ========yes
 
-my_data -- index.php -------- links for personal my_data
+my_data -- index.php ------ page layout =========yes
 
-dashboard.php ------------- links for all data
+my_data -- index.php -------- links for personal my_data =============yes
 
-header -- link icons to be added
+dashboard.php ------------- links for all data ================yes
+
+header -- link icons to be added =====================yes
 
 
 
 HOMEPAGE ERRORS ====================================================================
 
 
-posts ------ post_author not displayed
+posts ------ post_author not displayed ===============yes
 
-posts ----- comment section
+posts ----- comment section =================yes
 
-post --------- post_likes function
+post --------- post_likes function ===========yes
 
-to make ---- likes table in database
+to make ---- likes table in database ==============yes
 
-header -- link icons to be added
+header -- link icons to be added ===========yes
 
-auhtor_post -- page layout
+auhtor_post -- page layout =======================yes
 
-all over layout of the site to be viewed
+all over layout of the site to be viewed ==================yes

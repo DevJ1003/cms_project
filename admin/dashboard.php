@@ -14,10 +14,8 @@
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">
-                        <?php
-                        welcomeLineDashboard()
-                        ?>
+                    <h1 class="page-header"><i class="fa fa-fw fa-dashboard"></i>
+                        <?php welcomeLineDashboard(); ?>
                         <small><?php echo $_SESSION['username'] ?></small>
                     </h1>
 

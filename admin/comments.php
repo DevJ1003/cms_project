@@ -1,73 +1,70 @@
-<?php include"includes/admin_header.php" ?>
+<?php include "includes/admin_header.php" ?>
 
-    <div id="wrapper">
+<div id="wrapper">
 
-        <!-- Navigation -->
-        
-        <?php include"includes/admin_navigation.php" ?>
+    <!-- Navigation -->
 
-        <div id="page-wrapper">
+    <?php include "includes/admin_navigation.php" ?>
 
-            <div class="container-fluid">
+    <div id="page-wrapper">
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Welcome To Admin
-                            <small><?php echo $_SESSION['username'] ?></small>
-                        </h1>
-                   
- 
-            <?php
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"><i class="fa fa-fw fa-file"></i>
+                        All Comments...!!
+                        <small><?php echo $_SESSION['username'] ?></small>
+                    </h1>
 
 
-            if(isset($_GET['source'])){
-
-            $source = $_GET['source'];
-
-            } else{
-
-            $source = '';
-
-            }
-
-            switch ($source){
+                    <?php
 
 
-            case 'add_post';
-            include "includes/add_post.php";
-            break;
+                    if (isset($_GET['source'])) {
 
-            case 'edit_post';
-            include "includes/edit_post.php";
-            break;
+                        $source = $_GET['source'];
+                    } else {
 
-            case '200';
-            echo "NICE 200";
-            break;
+                        $source = '';
+                    }
 
-            
-            default : 
+                    switch ($source) {
 
-            include "includes/view_all_comments.php";
 
-            break;
+                        case 'add_post';
+                            include "includes/add_post.php";
+                            break;
 
-            }
+                        case 'edit_post';
+                            include "includes/edit_post.php";
+                            break;
 
-            ?>
+                        case '200';
+                            echo "NICE 200";
+                            break;
+
+
+                        default:
+
+                            include "includes/view_all_comments.php";
+
+                            break;
+                    }
+
+                    ?>
 
 
 
-                    </div>
                 </div>
-                <!-- /.row -->
-
             </div>
-            <!-- /.container-fluid -->
+            <!-- /.row -->
 
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /.container-fluid -->
 
-        <?php include"includes/admin_footer.php" ?>
+    </div>
+    <!-- /#page-wrapper -->
+
+    <?php include "includes/admin_footer.php" ?>

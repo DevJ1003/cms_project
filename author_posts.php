@@ -27,22 +27,22 @@ include "includes/navigation.php";
 
 
 
-            <h1 class="page-header text-center">
+            <h1 class="page-header text-center"><span class='glyphicon glyphicon-th-list'></span>
                 All posts by
-                <?php echo $the_post_author; ?>
+                <?php echo $the_post_author; ?>...!!
             </h1>
 
 
             <?php
 
-            $query = "SELECT * FROM posts WHERE post_user = '{$the_post_author}' ";
+            $query = "SELECT * FROM posts WHERE post_author = '{$the_post_author}' ";
             $select_all_posts = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($select_all_posts)) {
 
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
-                $post_author = $row['post_user'];
+                $post_author = $row['post_author'];
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = $row['post_content'];

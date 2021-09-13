@@ -45,6 +45,7 @@ if (isset($_POST['edit_user'])) {
     $username = $_POST['username'];
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
+    $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
 
 
     $query = "UPDATE users SET ";
@@ -76,8 +77,8 @@ if (isset($_POST['edit_user'])) {
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">
-                        Welcome To Admin
+                    <h1 class="page-header"><i class="fa fa-fw fa-user"></i>
+                        Your Profile...!!
                         <small><?php echo $_SESSION['username'] ?></small>
                     </h1>
 

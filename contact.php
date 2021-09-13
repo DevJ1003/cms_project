@@ -30,7 +30,9 @@ include "includes/navigation.php";
             <div class="row">
                 <div class="col-xs-6 col-xs-offset-3">
                     <div class="form-wrap">
-                        <h1>Register</h1>
+                        <div class="text-center">
+                            <h1><span class="glyphicon glyphicon-phone-alt"></span> Contact</h1>
+                        </div>
                         <form role="form" action="" method="post" id="login-form" autocomplete="off">
 
                             <div class="form-group">

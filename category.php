@@ -15,11 +15,11 @@ if (isset($_GET['category'])) {
 
     if (isset($_SESSION['username']) && is_admin($_SESSION['username'])) {
 
-        $stmt1 = mysqli_prepare($connection, "SELECT post_id , post_title , post_user , post_date , post_image , post_content
+        $stmt1 = mysqli_prepare($connection, "SELECT post_id , post_title , post_author , post_date , post_image , post_content
                                                             FROM posts WHERE post_category_id = ?");
     } else {
 
-        $stmt2 = mysqli_prepare($connection, "SELECT post_id , post_title , post_user , post_date , post_image , post_content
+        $stmt2 = mysqli_prepare($connection, "SELECT post_id , post_title , post_ , pauthorost_date , post_image , post_content
                                                             FROM posts WHERE post_category_id = ? AND post_status = ?");
 
         $published = 'Published';

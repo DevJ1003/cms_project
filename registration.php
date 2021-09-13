@@ -120,7 +120,9 @@ include "includes/navigation.php";
             <div class="row">
                 <div class="col-xs-6 col-xs-offset-3">
                     <div class="form-wrap">
-                        <h1><?php echo _REGISTER; ?></h1>
+                        <div class="text-center">
+                            <h1><span class="glyphicon glyphicon-user"></span> <?php echo _REGISTER; ?></h1>
+                        </div>
                         <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
 
                             <div class="form-group">

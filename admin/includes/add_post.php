@@ -2,15 +2,14 @@
 
 if (escape(isset($_POST['create_post']))) {
 
-    $_SESSION['user_id'];
-    $_SESSION['username'];
-
-    $post_title = $_POST['title'];
-    $post_user = $_SESSION['username'];
-    $post_category_id = $_POST['post_category'];
     $user_id = $_SESSION['user_id'];
-    $post_status = $_POST['post_status'];
+    $username = $_SESSION['username'];
 
+    /* FORM DATA */
+    $post_title = $_POST['title'];
+    $post_category_id = $_POST['post_category'];
+    $post_author = $_SESSION['username'];
+    $post_status = $_POST['post_status'];
 
     $post_image = $_FILES['image']['name'];
     $post_image_temp = $_FILES['image']['tmp_name'];
@@ -19,16 +18,13 @@ if (escape(isset($_POST['create_post']))) {
     $post_content = $_POST['post_content'];
     $post_date = date('d-m-y');
 
-
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
 
 
-    $query = "INSERT INTO posts( post_category_id , post_user , post_title , post_date , post_image , post_content , post_tags 
-                            , post_status ) ";
+    $query = "INSERT INTO posts( post_title , post_category_id , post_author , post_status , post_image , post_tags , post_content , post_date) ";
 
-    $query .= "VALUES( '{$post_category_id}' , '{$_SESSION['user_id']}' , '{$post_title}' , '{$post_user}' , '{$post_date}' , '{$post_image}' , '{$post_content}' ,
-                  '{$post_tags}' , '{$post_status}' )";
+    $query .= "VALUES( '{$post_title}' , '{$post_category_id}' , '{$post_author}' , '{$post_status}' , '{$post_image}' , '{$post_tags}' , '{$post_content}' , '{$post_date}' )";
 
     $create_post_query = mysqli_query($connection, $query);
 
@@ -75,7 +71,7 @@ if (escape(isset($_POST['create_post']))) {
 
     </div>
     <div class="from-group">
-        <select name="post status" id="">
+        <select name="post_status" id="">
             <option value="Draft">Post Status</option>
             <option value="Published">Pulished</option>
             <option value="Draft">Draft</option>

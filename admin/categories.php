@@ -13,19 +13,20 @@
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">
-                        Welcome To Admin
+                    <h1 class="page-header"><i class="fa fa-fw fa-wrench"></i>
+                        All Categories...!!
                         <small><?php echo $_SESSION['username'] ?></small>
                     </h1>
 
                     <div class="col-xs-6">
 
-                        <?php insert_categories(); ?>
+                        <?php insert_categories();
+                        ?>
 
                         <form action="" method="post">
                             <div class="form-group">
                                 <label for="cat-title">Add Category</label>
-                                <input type="text" class="form-control" name="cat_title">
+                                <input type="text" class="form-control" name="cat_title" required data-validation-required-message="Please enter">
                             </div>
 
                             <div class="form-group">

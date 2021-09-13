@@ -131,12 +131,15 @@ function get_all_user_draft_posts()
 function welcomeLineIndex()
 {
 
-     if ($_SESSION['user_role'] == "Admin") {
+     if (IsLoggedIn()) {
 
-          echo " Welcome To My Data";
-     } else {
+          if ($_SESSION['user_role'] == "Admin") {
 
-          echo " Welcome To My Data";
+               echo " Welcome To My Data";
+          } else {
+
+               echo " Welcome To My Data";
+          }
      }
 }
 
@@ -145,10 +148,12 @@ function welcomeLineIndex()
 
 function welcomeLineDashboard()
 {
+     if (IsLoggedIn()) {
 
-     if ($_SESSION['user_role'] == "Admin") {
+          if ($_SESSION['user_role'] == "Admin") {
 
-          echo " Welcome To Dashboard";
+               echo " Welcome To Dashboard";
+          }
      }
 }
 
@@ -244,7 +249,7 @@ function CheckIfUserIsLoggedInAndRedirect($redirectLocation = null)
 function getPostlikes($post_id)
 {
 
-     $result = query("SELECT * FROM likes WHERE post_id=$post_id");
+     $result = query("SELECT * FROM likes WHERE post_id = $post_id");
      confirm($result);
      echo mysqli_num_rows($result);
 }
@@ -324,6 +329,11 @@ function confirm($results)
 }
 
 
+
+
+
+
+
 function insert_categories()
 {
 
@@ -331,7 +341,6 @@ function insert_categories()
 
      if (isset($_POST['submit'])) {
 
-          $_SESSION['user_id'];
           $cat_title = $_POST['cat_title'];
 
 
@@ -340,18 +349,21 @@ function insert_categories()
                echo "This field should not be empty";
           } else {
 
-               $stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES(?) ");
-               mysqli_stmt_bind_param($stmt, 's', $cat_title, $user_id);
-               mysqli_stmt_execute($stmt);
+               $cat_query = "INSERT INTO categories(cat_title) VALUES('{$cat_title}') ";
+               $query = mysqli_query($connection, $cat_query);
+               confirm($query);
 
-               if (!$stmt) {
+               if (!$query) {
                     die('QUERY FAILED' . mysqli_error($connection));
                }
           }
-
-          mysqli_stmt_close($stmt);
      }
 }
+
+
+
+
+
 
 
 

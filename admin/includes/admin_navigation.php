@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="../index.php">HOME</a>
+        <a class="navbar-brand" href="../index.php"><i class="fa fa-home"></i> HOME</a>
     </div>
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
@@ -58,7 +58,7 @@
                 </li>
             <?php endif; ?>
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#post_dropdown"><i class="fa fa-fw fa-arrows-v"></i>Posts<i class="fa fa-fw fa-caret-down"></i></a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#post_dropdown"><span class="glyphicon glyphicon-flag"></span> Posts<i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="post_dropdown" class="collapse">
                     <li>
                         <a href="posts.php">View All Posts</a>
@@ -69,10 +69,10 @@
                 </ul>
             </li>
             <li>
-                <a href="categories.php"><i class="fa fa-fw fa-wrench"></i>Categories</a>
+                <a href="categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
             </li>
             <li class="">
-                <a href="comments.php"><i class="fa fa-fw fa-file"></i>Comments</a>
+                <a href="comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>
             </li>
             <?php if (is_admin()) : ?>
                 <li>
@@ -88,7 +88,7 @@
                 </li>
             <?php endif; ?>
             <li>
-                <a href="profile.php"><i class="fa fa-fw fa-dashboard"></i>Profile</a>
+                <a href="profile.php"><i class="fa fa-fw fa-user"></i>Profile</a>
             </li>
         </ul>
     </div>

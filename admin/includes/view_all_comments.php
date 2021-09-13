@@ -8,10 +8,36 @@
             <th>Status</th>
             <th>In Response to</th>
             <th>Date</th>
-            <th>Approve</th>
-            <th>Unapprove</th>
-            <!--<th>Edit</th>-->
+
+            <?php
+
+            $username = $_SESSION['username'];
+
+            $query = "SELECT user_role FROM users WHERE username = '{$username}' ";
+            $user_query = mysqli_query($connection, $query);
+
+            while ($row = mysqli_fetch_array($user_query)) {
+
+                $user_role = $row['user_role'];
+            }
+
+
+            if ($user_role == 'Admin') {
+
+            ?>
+
+                <th>Approve</th>
+                <th>Unapprove</th>
+                <!--<th>Edit</th>-->
+
+            <?php
+
+            } elseif ($user_role == 'Subscriber') {
+            }
+
+            ?>
             <th>Delete</th>
+
         </tr>
     </thead>
 
@@ -20,10 +46,26 @@
     <?php
 
 
-    $query = "SELECT * FROM comments";
-    $select_comments = mysqli_query($connection, $query);
+    $username = $_SESSION['username'];
+
+    $query = "SELECT user_role FROM users WHERE username = '{$username}' ";
+    $user_query = mysqli_query($connection, $query);
+
+    while ($row = mysqli_fetch_array($user_query)) {
+
+        $user_role = $row['user_role'];
+    }
 
 
+    if ($user_role == 'Admin') {
+
+        $query = "SELECT * FROM comments";
+        $select_comments = mysqli_query($connection, $query);
+    } elseif ($user_role == 'Subscriber') {
+
+        $query = "SELECT * FROM comments WHERE comment_author = '{$username}' ";
+        $select_comments = mysqli_query($connection, $query);
+    }
     while ($row = mysqli_fetch_assoc($select_comments)) {
 
 
@@ -79,10 +121,32 @@
 
 
         echo "<td>$comment_date</td>";
-        echo "<td><a class='btn btn-info' href='comments.php?approve=$comment_id'>Approve</a></td>";
-        echo "<td><a class='btn btn-success' href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
-        echo "<td><a class='btn btn-danger' href='comments.php?delete=$comment_id'>Delete</a></td>";
-        echo "</tr>";
+
+
+        $username = $_SESSION['username'];
+
+        $query = "SELECT user_role FROM users WHERE username = '{$username}' ";
+        $user_query = mysqli_query($connection, $query);
+
+        while ($row = mysqli_fetch_array($user_query)) {
+
+            $user_role = $row['user_role'];
+        }
+
+
+        if ($user_role == 'Admin') {
+
+
+            echo "<td><a class='btn btn-info' href='comments.php?approve=$comment_id'>Approve</a></td>";
+            echo "<td><a class='btn btn-success' href='comments.php?unapprove=$comment_id'>Unapprove</a></td>";
+            echo "<td><a class='btn btn-danger' href='comments.php?delete=$comment_id'>Delete</a></td>";
+        } elseif ($user_role == 'Subscriber') {
+
+
+            echo "<td><a class='btn btn-danger' href='comments.php?delete=$comment_id'>Delete</a></td>";
+
+            echo "</tr>";
+        }
     }
 
 

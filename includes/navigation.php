@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/CMS">CMS HOME</a>
+            <a class="navbar-brand" href="/CMS"><span class="glyphicon glyphicon-home"></span> CMS HOME</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -74,7 +74,7 @@
 
 
                     <li>
-                        <a href="/CMS/admin">Admin</a>
+                        <a href="/CMS/admin"><span class="glyphicon glyphicon-user"></span> Admin</a>
                     </li>
 
 
@@ -83,11 +83,11 @@
                 ?>
 
                     <li class='<?php echo $login_class; ?>'>
-                        <a href="/CMS/login">Login</a>
+                        <a href="/CMS/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
                     </li>
 
                     <li class='<?php echo $registration_class; ?>'>
-                        <a href="/CMS/registration">Registration</a>
+                        <a href="/CMS/registration"><span class="glyphicon glyphicon-user"></span> Registration</a>
                     </li>
 
 
@@ -95,7 +95,7 @@
                 ?>
 
                 <li class='<?php echo $contact_class; ?>'>
-                    <a href="/CMS/contact">Contact</a>
+                    <a href="/CMS/contact"><span class="glyphicon glyphicon-phone-alt"></span> Contact</a>
                 </li>
 
 

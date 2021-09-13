@@ -65,7 +65,7 @@ if (escape(isset($_POST['checkBoxArray']))) {
                     $post_title       = $row['post_title'];
                     $post_category_id = $row['post_category_id'];
                     $post_date        = $row['post_date'];
-                    $post_user        = $row['post_user'];
+                    $post_author        = $row['post_author'];
                     $post_status      = $row['post_status'];
                     $post_image       = $row['post_image'];
                     $post_tags        = $row['post_tags'];
@@ -76,10 +76,10 @@ if (escape(isset($_POST['checkBoxArray']))) {
                         $post_tags = 'No Tags';
                     }
 
-                    $query = "INSERT INTO posts( post_category_id , post_title  , post_user , post_date , post_image , post_content , post_tags 
+                    $query = "INSERT INTO posts( post_category_id , post_title  , post_author , post_date , post_image , post_content , post_tags 
         , post_status ) ";
 
-                    $query .= "VALUES( '{$post_category_id}' , '{$post_title}'  , '{$post_user}' ,'{$post_date}' , '{$post_image}' , '{$post_content}' ,
+                    $query .= "VALUES( '{$post_category_id}' , '{$post_title}'  , '{$post_author}' ,'{$post_date}' , '{$post_image}' , '{$post_content}' ,
         '{$post_tags}' , '{$post_status}' )";
 
                     $copy_post_query = mysqli_query($connection, $query);
@@ -124,7 +124,7 @@ if (escape(isset($_POST['checkBoxArray']))) {
             <tr>
                 <th><input id="selectAllBoxes" type="checkbox"></th>
                 <th>ID</th>
-                <th>Users</th>
+                <th>Author</th>
                 <th>Title</th>
                 <th>Category</th>
                 <th>Status</th>
@@ -143,15 +143,31 @@ if (escape(isset($_POST['checkBoxArray']))) {
 
 <?php
 
+$username = $_SESSION['username'];
 
-$query = "SELECT * FROM posts ORDER BY post_id DESC";
-$select_posts = mysqli_query($connection, $query);
+$query = "SELECT user_role FROM users WHERE username = '{$username}' ";
+$user_query = mysqli_query($connection, $query);
+
+while ($row = mysqli_fetch_array($user_query)) {
+
+    $user_role = $row['user_role'];
+}
 
 
-while ($row = mysqli_fetch_assoc($select_posts)) {
+if ($user_role == 'Admin') {
+
+    $query = "SELECT * FROM posts ORDER BY post_id DESC";
+    $select_posts = mysqli_query($connection, $query);
+} elseif ($user_role == 'Subscriber') {
+
+    $query = "SELECT * FROM posts WHERE post_author = '{$username}' ORDER BY post_id DESC";
+    $select_posts = mysqli_query($connection, $query);
+}
+
+while ($row = mysqli_fetch_array($select_posts)) {
 
     $post_id = $row['post_id'];
-    $post_user = $row['post_user'];
+    $post_author = $row['post_author'];
     $post_title = $row['post_title'];
     $post_category_id = $row['post_category_id'];
     $post_status = $row['post_status'];
